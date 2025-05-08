@@ -1,4 +1,6 @@
 import React from 'react'
+import LanguageCard from './LanguageCard';
+import { useState } from 'react';
 
 const LanguageList = () => {
 
@@ -35,19 +37,33 @@ const LanguageList = () => {
         }
     ];
 
+    // let idClicked = null;
+    const [clicked, setClicked] = useState(false);
+
     return (
         <div className="container">
             {languages.map((language) => (
-                <button>{language.title}</button>
+                <>
+                    <button onClick={() => { setClicked(language) }}>{language.title}</button>
+                </>
             ))}
-            <div className="card">
-                <h2>{languages[0].title}</h2>
-                <div className="content">
-                    {languages[0].description}
-                </div>
-            </div>
-        </div>
 
+            {/* <div>{clicked}</div> */}
+
+            {/* {languages.map((language) => (
+                <>
+                    <LanguageCard language={language} key={language.id} />
+                </>
+            ))} */}
+
+
+            {
+                clicked != false ? <LanguageCard title={clicked.title} description={clicked.description} /> : ""
+            }
+
+
+
+        </div>
     )
 }
 
